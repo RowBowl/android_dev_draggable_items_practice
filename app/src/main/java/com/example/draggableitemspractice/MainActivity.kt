@@ -39,11 +39,6 @@ import androidx.core.graphics.ColorUtils
 import com.example.draggableitemspractice.ui.theme.DraggableItemsPracticeTheme
 import kotlin.random.Random
 
-enum class DragAnchors(val fraction: Float) {
-    Start(0f),
-    Half(0.5f),
-    End(1f)
-}
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
