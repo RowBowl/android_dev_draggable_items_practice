@@ -3,6 +3,7 @@ package com.example.draggableitemspractice
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.FlingBehavior
@@ -28,6 +29,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.text.style.TextAlign
@@ -88,7 +90,8 @@ fun SnappingItemList(modifier: Modifier = Modifier) {
             .padding(16.dp)
             .fillMaxHeight(),
         state = listState,
-        flingBehavior = flingBehavior
+        flingBehavior = flingBehavior,
+        verticalArrangement = Arrangement.spacedBy(6.dp)
     ) {
         items(3) {index ->
             val containerColor = Color(
@@ -105,7 +108,10 @@ fun SnappingItemList(modifier: Modifier = Modifier) {
                 index = index,
                 containerColor = containerColor,
                 contentColor = contentColor,
-                modifier = Modifier.fillParentMaxHeight()
+                modifier = Modifier
+                    .scale(if(listState.isScrollInProgress) 0.8f else 1f)
+                    .animateContentSize()
+                    .fillParentMaxHeight()
             )
 
         }
